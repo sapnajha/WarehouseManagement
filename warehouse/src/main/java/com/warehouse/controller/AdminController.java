@@ -34,8 +34,8 @@ public class AdminController {
 	 */
 	@RequestMapping("/add")
 	public ModelAndView addCustomer(Customer customer, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject(customer);
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.addObject(customer);
 		Login login = new Login();
 		login.setUsername((String) session.getAttribute("sessionname"));
 		customer.setLogin(login);
@@ -43,13 +43,13 @@ public class AdminController {
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, customer, String.class);
 		if (status.equals("success")) {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User added Successfully");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "User added Successfully");
 		} else {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User Could not be added ");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "User Could not be added ");
 		}
-		return mv;
+		return modelandview;
 	}
 
 	// view customers
@@ -67,10 +67,10 @@ public class AdminController {
 				new ParameterizedTypeReference<List<Customer>>() {
 				});
 		List<Customer> customer_details = customerlist.getBody();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/Admin.jsp?operation=view_customers");
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("/Admin.jsp?operation=view_customers");
 		session.setAttribute("customer_details", customer_details);
-		return mv;
+		return modelandview;
 	}
 
 	// view a particular customer
@@ -90,10 +90,10 @@ public class AdminController {
 				null, new ParameterizedTypeReference<Optional<Customer>>() {
 				});
 		Optional<Customer> customer_details = customer_data.getBody();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/Admin.jsp?operation=view_a_customer");
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("/Admin.jsp?operation=view_a_customer");
 		session.setAttribute("customer_details", customer_details);
-		return mv;
+		return modelandview;
 	}
 
 	// delete a customer
@@ -107,19 +107,19 @@ public class AdminController {
 	@RequestMapping("/deletecustomer")
 	public ModelAndView deleteCustomer(Customer customer) {
 		System.out.println(customer.getCustomer_name());
-		ModelAndView mv = new ModelAndView();
-		mv.addObject(customer);
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.addObject(customer);
 		String url = "http://localhost:8181/operation/deletecustomer";
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, customer, String.class);
 		if (status.equals("success")) {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User deleted Successfully");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "User deleted Successfully");
 		} else {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User could not be deleted");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "User could not be deleted");
 		}
-		return mv;
+		return modelandview;
 	}
 
 	// viewing items
@@ -137,9 +137,9 @@ public class AdminController {
 				new ParameterizedTypeReference<List<Item>>() {
 				});
 		List<Item> item_details = itemlist.getBody();
-		ModelAndView mv = new ModelAndView("/Admin.jsp?operation=view_items");
+		ModelAndView modelandview = new ModelAndView("/Admin.jsp?operation=view_items");
 		session.setAttribute("item_details", item_details);
-		return mv;
+		return modelandview;
 	}
 
 	// viewing stock items
@@ -157,9 +157,9 @@ public class AdminController {
 				new ParameterizedTypeReference<List<Item>>() {
 				});
 		List<Item> item_details = itemlist.getBody();
-		ModelAndView mv = new ModelAndView("/Admin.jsp?operation=Add_Stock");
-		mv.addObject("item_details", item_details);
-		return mv;
+		ModelAndView modelandview = new ModelAndView("/Admin.jsp?operation=Add_Stock");
+		modelandview.addObject("item_details", item_details);
+		return modelandview;
 	}
 
 	// add stock
@@ -172,19 +172,19 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/add_stock")
 	public ModelAndView addStock(Item item) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject(item);
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.addObject(item);
 		String url = "http://localhost:8181/operation/addstock";
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, item, String.class);
 		if (status.equals("success")) {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Stock added Successfully");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "Stock added Successfully");
 		} else {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Stock could not be added");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "Stock could not be added");
 		}
-		return mv;
+		return modelandview;
 	}
 
 	// Place Order
@@ -198,16 +198,16 @@ public class AdminController {
 	@RequestMapping("/place_order")
 	public ModelAndView placeOrder(@RequestParam("customer_code") String customer_code,
 			@RequestParam("item_code") int item_code, @RequestParam("item_stock") int item_stock) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView modelandview = new ModelAndView();
 		// get List of items
 		String url = "http://localhost:8181/operation/place_order/" + customer_code + "/" + item_code + "/"
 				+ item_stock;
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, null, String.class);
-		mv.setViewName("/Admin.jsp");
-		mv.addObject("msg", status);
+		modelandview.setViewName("/Admin.jsp");
+		modelandview.addObject("message", status);
 
-		return mv;
+		return modelandview;
 	}
 
 	// viewing purchase details
@@ -227,9 +227,9 @@ public class AdminController {
 				new ParameterizedTypeReference<List<Purchase>>() {
 				});
 		List<Purchase> transaction_details = purchase_details.getBody();
-		ModelAndView mv = new ModelAndView("/Admin.jsp?operation=View_Purchase");
+		ModelAndView modelandview = new ModelAndView("/Admin.jsp?operation=View_Purchase");
 		session.setAttribute("transaction_details", transaction_details);
-		return mv;
+		return modelandview;
 	}
 
 	// adding an item
@@ -242,8 +242,8 @@ public class AdminController {
 	 */
 	@RequestMapping("/add_item")
 	public ModelAndView addItem(Item item, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject(item);
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.addObject(item);
 		Login login = new Login();
 		login.setUsername((String) session.getAttribute("sessionname"));
 		item.setLogin(login);
@@ -251,13 +251,13 @@ public class AdminController {
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, item, String.class);
 		if (status.equals("success")) {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Item added Successfully");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "Item added Successfully");
 		} else {
-			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Item could not be Added");
+			modelandview.setViewName("/Admin.jsp");
+			modelandview.addObject("message", "Item could not be Added");
 		}
-		return mv;
+		return modelandview;
 	}
 
 }
