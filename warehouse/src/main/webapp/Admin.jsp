@@ -59,7 +59,7 @@ input {
 	<h3>
 		Welcome
 		<%=session.getAttribute("sessionname")%></h3>
-		<center>${msg}</center>
+		<center>${message}</center>
 	<div>
 		<ul>
 			<li><a href="Admin.jsp?operation=Add_Customer">Add Customer</a></li>
