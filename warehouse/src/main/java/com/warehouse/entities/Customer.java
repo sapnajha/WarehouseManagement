@@ -12,7 +12,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Customer {
 	
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int customer_code;
 	
 	@Id
