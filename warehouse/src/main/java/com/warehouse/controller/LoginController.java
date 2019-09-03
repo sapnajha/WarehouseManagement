@@ -19,16 +19,16 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView loginController()
 	{
-		ModelAndView mv=new ModelAndView("login.jsp");
+		ModelAndView modelandview=new ModelAndView("login.jsp");
 		Login login=new Login();
-		mv.addObject(login);
-		return mv;
+		modelandview.addObject(login);
+		return modelandview;
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public String logincontrol(Login login,HttpSession session,HttpServletRequest request)
 	{
-		ModelAndView mv=new ModelAndView();
-		mv.addObject(login);
+		ModelAndView modelandview=new ModelAndView();
+		modelandview.addObject(login);
 		session =request.getSession(true);
 		session.setAttribute("sessionname",login.getUsername());
 		String url="http://localhost:8181/valid/check";
