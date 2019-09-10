@@ -112,7 +112,6 @@ if(operation!=null){
 			<%
 				@SuppressWarnings("unchecked")
 						List<Customer> customers = (List<Customer>) session.getAttribute("customer_details");
-			System.out.print(customers);
 						for (Customer c : customers) {
 			%>
 			<tr>
