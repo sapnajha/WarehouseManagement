@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-@ComponentScan(basePackages = {"com.warehouse","com.warehouse.controller"})
+@ComponentScan(basePackages = {"com.warehouse","com.warehouse.controller","com.warehouse.repository"})
 @EntityScan(basePackages = {"com.warehouse.entities"})
-@EnableJpaRepositories(basePackages = {"com.warehouse.dao"})
+@EnableJpaRepositories(basePackages = {"com.warehouse.services","com.warehouse.repository"})
 @SpringBootApplication
 public class WarehouseApplication {
 

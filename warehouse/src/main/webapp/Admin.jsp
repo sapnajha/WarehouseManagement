@@ -59,11 +59,12 @@ input {
 	<h3>
 		Welcome
 		<%=session.getAttribute("sessionname")%></h3>
-		<center>${msg}</center>
+		<center>${message}</center>
 	<div>
 		<ul>
 			<li><a href="Admin.jsp?operation=Add_Customer">Add Customer</a></li>
 			<li><a href="ViewCustomers">View All Customers</a></li>
+			
 			<li><a href="Admin.jsp?operation=View_Customer">Customer Details</a></li>
 			<li><a href="Admin.jsp?operation=Delete_Customer">Delete Customer</a></li>		
 			<li><a href="ViewItems">Items Details</a></li>
@@ -94,40 +95,39 @@ if(operation!=null){
 	<%
 	}
 	if(operation.equals("view_customers")){
+		%>
 
-%>
+		<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+			<center><h1>Customer Details</h1></center>
+				<table style="width: 80%" id="a" border=1 align="center">
+					<tr>
+						
+						
+						<th>Customer Code</th>
+						<th>Customer Name</th>
+						<th>Address</th>
+						<th>Phone Number</th>
+					</tr>
 
-<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-	<center><h1>Customer Details</h1></center>
-		<table style="width: 80%" id="a" border=1 align="center">
-			<tr>
-				
-				
-				<th>Customer Code</th>
-				<th>Customer Name</th>
-				<th>Address</th>
-				<th>Phone Number</th>
-			</tr>
+					<%
+						@SuppressWarnings("unchecked")
+								List<Customer> customers = (List<Customer>) session.getAttribute("customer_details");
+								for(Customer c : customers) {
+					%>
+					<tr>
+						<td><%=c.getCustomer_code()%></td>
+						<td><%=c.getCustomer_name()%></td>
+						<td><%=c.getAddress()%></td>
+						<td><%=c.getPhone_number()%></td>
+					</tr>
 
+					<%
+						}
+			}
+					%>
+				</table>
+			</div>
 			<%
-				@SuppressWarnings("unchecked")
-						List<Customer> customers = (List<Customer>) session.getAttribute("customer_details");
-						for (Customer c : customers) {
-			%>
-			<tr>
-				<td><%=c.getCustomer_code()%></td>
-				<td><%=c.getCustomer_name()%></td>
-				<td><%=c.getAddress()%></td>
-				<td><%=c.getPhone_number()%></td>
-			</tr>
-
-			<%
-				}
-	}
-			%>
-		</table>
-	</div>
-	<%
 	if(operation.equals("View_Customer")){
 	%>
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
@@ -155,7 +155,7 @@ if(operation!=null){
 			<%
 				@SuppressWarnings("unchecked")
 			Optional<Customer> customers = (Optional<Customer>) session.getAttribute("customer_details");
-			if(customers.get().getCustomer_name()!=null){
+			if(customers.isPresent()){
 			%>
 			<tr>
 				<td><%=customers.get().getCustomer_code()%></td>
@@ -164,10 +164,14 @@ if(operation!=null){
 				<td><%=customers.get().getPhone_number()%></td>
 			</tr>
 				</table>
-				<%} %>
+				<%}
+			else
+			{ %>
+				<p text-align="center">Sorry,Customer Doesn't Exist</p>
+			<% }%>
 	</div>
 <%
-}
+ }
 	
 	if(operation.equals("Delete_Customer")){
 	%>
@@ -200,7 +204,8 @@ if(operation!=null){
 			double difference;
 				@SuppressWarnings("unchecked")
 						List<Item> items = (List<Item>) session.getAttribute("item_details");
-						for (Item item : items) {
+				if(items.size()>0){		
+				for (Item item : items) {
 							if(item.getItem_price()>10 || item.getItem_price()<100){
 					    		difference = (int) (item.getItem_price() * 0.1);
 					    	discount=(item.getItem_price()-difference);
@@ -223,6 +228,11 @@ if(operation!=null){
 			</tr>
 
 			<%
+				}
+				}else
+				{%>
+				<p text-align="center">Sorry, List is Empty</p>
+				<%
 				}
 			%>
 
@@ -289,7 +299,8 @@ if(operation!=null){
 			<%
 						@SuppressWarnings("unchecked")
 						List<Purchase> purchases = (List<Purchase>) session.getAttribute("transaction_details");
-						for (Purchase purchase : purchases) {
+			if(purchases.size()>0){			
+			for (Purchase purchase : purchases) {
 			%>
 			<tr>
 				<td><%=purchase.getTransaction_id()%></td>
@@ -301,6 +312,11 @@ if(operation!=null){
 
 			<%
 				}
+			}
+			else
+			{%>
+				<p text-align="center">Sorry, No Transaction Made On This Date</p>	
+		<%	}
 			%>
 		</table>
 	</div>

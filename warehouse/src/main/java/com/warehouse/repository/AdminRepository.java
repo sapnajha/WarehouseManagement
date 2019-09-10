@@ -1,4 +1,4 @@
-package com.warehouse.dao;
+package com.warehouse.repository;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.warehouse.entities.*;
 
 @Repository

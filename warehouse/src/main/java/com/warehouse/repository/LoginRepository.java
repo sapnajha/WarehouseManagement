@@ -1,4 +1,4 @@
-package com.warehouse.dao;
+package com.warehouse.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

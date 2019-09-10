@@ -1,11 +1,13 @@
-package com.warehouse.dao;
+package com.warehouse.services;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.warehouse.entities.Login;
+import com.warehouse.entities.*;
+import com.warehouse.repository.*;
+
 @Service
 public class LoginDao {
 	@Autowired

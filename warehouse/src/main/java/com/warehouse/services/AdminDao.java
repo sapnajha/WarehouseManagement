@@ -1,16 +1,15 @@
-package com.warehouse.dao;
+package com.warehouse.services;
 
 import java.time.LocalDate;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.warehouse.entities.Customer;
-import com.warehouse.entities.Item;
-import com.warehouse.entities.Purchase;
+import com.warehouse.entities.*;
+import com.warehouse.repository.*;
+
 
 @Service
 public class AdminDao {

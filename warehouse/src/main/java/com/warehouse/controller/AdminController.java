@@ -44,10 +44,10 @@ public class AdminController {
 		String status = resttemplate.postForObject(url, customer, String.class);
 		if (status.equals("success")) {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User added Successfully");
+			mv.addObject("message", "User added Successfully");
 		} else {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User Could not be added ");
+			mv.addObject("message", "User Could not be added ");
 		}
 		return mv;
 	}
@@ -114,10 +114,10 @@ public class AdminController {
 		String status = resttemplate.postForObject(url, customer, String.class);
 		if (status.equals("success")) {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User deleted Successfully");
+			mv.addObject("message", "User deleted Successfully");
 		} else {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "User could not be deleted");
+			mv.addObject("message", "User could not be deleted");
 		}
 		return mv;
 	}
@@ -179,10 +179,10 @@ public class AdminController {
 		String status = resttemplate.postForObject(url, item, String.class);
 		if (status.equals("success")) {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Stock added Successfully");
+			mv.addObject("message", "Stock added Successfully");
 		} else {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Stock could not be added");
+			mv.addObject("message", "Stock could not be added");
 		}
 		return mv;
 	}
@@ -205,7 +205,7 @@ public class AdminController {
 		RestTemplate resttemplate = new RestTemplate();
 		String status = resttemplate.postForObject(url, null, String.class);
 		mv.setViewName("/Admin.jsp");
-		mv.addObject("msg", status);
+		mv.addObject("message", status);
 
 		return mv;
 	}
@@ -252,10 +252,10 @@ public class AdminController {
 		String status = resttemplate.postForObject(url, item, String.class);
 		if (status.equals("success")) {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Item added Successfully");
+			mv.addObject("message", "Item added Successfully");
 		} else {
 			mv.setViewName("/Admin.jsp");
-			mv.addObject("msg", "Item could not be Added");
+			mv.addObject("message", "Item could not be Added");
 		}
 		return mv;
 	}

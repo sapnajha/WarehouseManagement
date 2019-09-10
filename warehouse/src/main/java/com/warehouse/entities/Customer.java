@@ -4,15 +4,13 @@ package com.warehouse.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Customer {
 	
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private int customer_code;
 	
 	@Id
