@@ -64,9 +64,7 @@ input {
 		<ul>
 			<li><a href="Admin.jsp?operation=Add_Customer">Add Customer</a></li>
 			<li><a href="ViewCustomers">View All Customers</a></li>
-			
-			<li><a href="Admin.jsp?operation=View_Customer">Customer Details</a></li>
-			<li><a href="Admin.jsp?operation=Delete_Customer">Delete Customer</a></li>		
+			<li><a href="Admin.jsp?operation=View_Customer">Customer Details</a></li>		
 			<li><a href="ViewItems">Items Details</a></li>
 			<li><a href="Admin.jsp?operation=Add_Item">Add Item</a>
 			<li><a href="view_stock">Add stock</a></li>		
@@ -172,18 +170,6 @@ if(operation!=null){
 	</div>
 <%
  }
-	
-	if(operation.equals("Delete_Customer")){
-	%>
-	<center><h1>Delete Customer</h1></center>
-		<form action="deletecustomer" method="post">
-		<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-
-			Customer Name:<input type="text" name="customer_name" required><br>
-			<input type="submit" value="submit">
-		</div>
-	</form>
-	<%}
 	
 	if(operation.equals("view_items")){%>
 	
