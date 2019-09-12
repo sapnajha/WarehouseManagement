@@ -1,4 +1,4 @@
-package com.warehouse;
+package com.warehouse.restcontroller;
 
 
 
@@ -15,7 +15,7 @@ import com.warehouse.services.*;
 @RequestMapping("/valid")
 public class LoginRest {
 	@Autowired
-	LoginDao logindao;
+	LoginService logindao;
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	   public String insert(@RequestBody Login login){
 			String status=logindao.check(login);
